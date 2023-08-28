@@ -7,8 +7,22 @@ import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountR
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
+import { useDispatch } from 'react-redux';
+import { auth } from './firebase';
+import { logout } from './features/userSlice';
+
+
+
 
 const Header = () => {
+
+  const dispatch = useDispatch();
+  const logoutOFApp = () =>{
+    dispatch(logout());
+    auth.signOut();
+  };
+
+
   return (
     <div className='header'>
         <div className='header_left'>
@@ -26,7 +40,11 @@ const Header = () => {
           <HeaderOptions Icon = {BusinessCenterRoundedIcon}title="Jobs"/>
           <HeaderOptions Icon = {ChatRoundedIcon}title="Messaging"/>
           <HeaderOptions Icon = {NotificationsRoundedIcon}title="Notifications"/>
-          <HeaderOptions avatar ="https://i.ibb.co/N9V88ry/imgphoto.jpg" title="Me"/>
+          <HeaderOptions 
+          title="Me"
+          onClick={logoutOFApp}
+          avatar={true}
+          />
         </div>
 
 

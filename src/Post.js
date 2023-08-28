@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{forwardRef}from 'react';
 import './Post.css';
 import { Avatar } from '@mui/material';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
@@ -6,19 +6,19 @@ import InputOption from './InputOption'
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-
-function Post({name , descripition, messages, photoUrl}) {
+//forwardRef is use for animation
+const Post=forwardRef(({name , descripition, messages, photoUrl},ref) =>{
   return (
-    <div className='post'>
+    <div ref={ref}className='post'>
         <div className='post__header'>
-        <Avatar/>
+        <Avatar src={photoUrl}>{name[0]}</Avatar>
         <div className='post__info'>
-            <h2>Sushil verma</h2>
-            <p>Descprition</p>
+            <h2>{name}</h2>
+            <p>{descripition}</p>
         </div>
         </div>
         <div className='post__body'>
-            <p>Messages</p>
+            <p>{messages}</p>
         </div>
         <div className='post__buttons'>
             <InputOption  Icon={ThumbUpAltOutlinedIcon} title='Like' color='gray'/>
@@ -28,6 +28,6 @@ function Post({name , descripition, messages, photoUrl}) {
         </div>
     </div>
   );
-}
+})
 
 export default Post;

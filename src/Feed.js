@@ -8,15 +8,20 @@ import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from './Post';
 import { db } from './firebase';
 import firebase from 'firebase/compat/app';
+import { useSelector } from 'react-redux';
+import { selectUser } from './features/userSlice';
+import FlipMove from 'react-flip-move';
 
 function Feed() {
+    const user=useSelector(selectUser);
     const[input,setInput] = useState('');
     // posts,setspost
     const [posts,setPosts] = useState([]);
 
     //function --> for firebase connection
+    // here order by is for ordering the post on the basis of timestamp
     useEffect(()=>{
-        db.collection("posts").onSnapshot((snapshot)=>
+        db.collection("posts").orderBy("timestamp","desc").onSnapshot((snapshot)=>
         setPosts(
             snapshot.docs.map((doc)=>({
                 id:doc.id,
@@ -31,13 +36,13 @@ function Feed() {
         e.preventDefault();
 
         db.collection('posts').add({
-            name:'sushil verma', 
-            descripition:'this is test',
+            name:user.displayName, 
+            descripition:user.email,
             messages:input,
-            photoUrl:'#',
+            photoUrl:user.photoUrl || "",
             timestamp:firebase.firestore.FieldValue.serverTimestamp(),
         });
-
+        sendPost("");
     };
   return (
     <div className='feed'>
@@ -55,8 +60,8 @@ function Feed() {
                 <InputOption Icon={CalendarViewDayIcon} title='Write Article'color='#E16745'/>
             </div>
         </div>
-
         {/* post-feed */}
+        <FlipMove>
         {posts.map(({id, data: {name,descripition,messages,photoUrl}})=>(
             <Post
             key={id}
@@ -66,6 +71,7 @@ function Feed() {
             photoUrl={photoUrl}
             />
         ))}
+        </FlipMove>
     </div>
   );
 }

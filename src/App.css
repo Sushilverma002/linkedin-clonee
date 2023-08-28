@@ -5,9 +5,13 @@
 .app{
   background-color: #F3F2F0;
   display: flex;
-  align-items: start;
+  align-items: center;
   flex-direction: column;
 }
 .app__Body{
   display: flex;
+  margin-top: 35px;
+  max-width: 1200px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
