@@ -1,3 +1,7 @@
+# Firstlook
+
+![linkedinclonee](https://github.com/Sushilverma002/linkedin-clonee/assets/114687502/d3c7b04a-464c-42ef-bdfd-42c46d1d19aa)
+
 # Getting Started with Create React App and Redux
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
